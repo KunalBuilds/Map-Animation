@@ -1,0 +1,563 @@
+/* MapComponent.css */
+:root {
+  --primary-color: #0074d9;
+  --secondary-color: #ff4444;
+  --accent-color: #2ecc40;
+  --background-color: #f8f9fa;
+  --text-color: #2c3e50;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --transition: all 0.3s ease;
+  --dark-bg: #1a1a2e;
+  --dark-text: #e0e0e0;
+  --light-bg: #f5f5f7;
+  --light-text: #333;
+}
+
+/* Base container styles */
+.map-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--background-color);
+  transition: background-color var(--transition);
+}
+
+/* Dark mode styles */
+.map-container.dark-mode {
+  background-color: var(--dark-bg);
+}
+
+/* Advanced map */
+.advanced-map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: filter var(--transition);
+}
+
+/* Controls panel with glassmorphism */
+.controls-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  transition: transform var(--transition), box-shadow var(--transition), background-color var(--transition);
+  animation: slideIn 0.6s ease-out;
+  padding: 20px;
+}
+
+.dark-mode .controls-panel {
+  background: rgba(33, 33, 33, 0.7);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--dark-text);
+}
+
+.controls-panel:hover {
+  transform: translateY(-3px) rotate(1deg);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation for controls panel entrance */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Search container for waypoints (modern UI) */
+.search-container {
+  background: var(--glass-bg);
+  border-radius: var(--border-radius);
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--glass-border);
+  transition: box-shadow var(--transition);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.dark-mode .search-container {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.search-container:hover {
+  box-shadow: inset 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Fade-in animation for search container */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Input styles with gradient border and glow */
+.waypoint-input {
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  padding: 14px 12px 14px 40px;
+  transition: border var(--transition), box-shadow var(--transition), transform var(--transition);
+  cursor: pointer;
+}
+
+.dark-mode .waypoint-input {
+  background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
+  color: var(--dark-text);
+}
+
+.waypoint-input:focus {
+  outline: none;
+  border-image: linear-gradient(45deg, var(--primary-color), var(--accent-color)) 1;
+  box-shadow: 0 0 12px rgba(74, 144, 226, 0.5);
+  animation: glowPulse 1.5s infinite;
+}
+
+.waypoint-input:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Glow pulse animation for focused inputs */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(74, 144, 226, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(74, 144, 226, 0.8);
+  }
+}
+
+/* Select styles */
+.controls-panel select {
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  padding: 14px;
+  transition: border var(--transition), box-shadow var(--transition), transform var(--transition);
+  cursor: pointer;
+}
+
+.dark-mode .controls-panel select {
+  background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
+  color: var(--dark-text);
+}
+
+.controls-panel select:focus {
+  outline: none;
+  border-image: linear-gradient(45deg, var(--primary-color), var(--accent-color)) 1;
+  box-shadow: 0 0 12px rgba(74, 144, 226, 0.5);
+  animation: glowPulse 1.5s infinite;
+}
+
+.controls-panel select:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styles with ripple effect */
+.controls-panel button {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  transition: transform var(--transition), box-shadow var(--transition);
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%230074d9" d="M12 2a10 10 0 0 0-10 10 10 10 0 0 0 10 10 10 10 0 0 0 10-10 10 10 0 0 0-10-10zm0 18a8 8 0 0 1-8-8 8 8 0 0 1 8-8 8 8 0 0 1 8 8 8 8 0 0 1-8 8z"/></svg>') 12 12, pointer;
+}
+
+.controls-panel button:hover:not(.theme-toggle) {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.controls-panel button:active:not(.theme-toggle) {
+  transform: scale(0.95);
+}
+
+/* Ripple effect on button click */
+.controls-panel button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+.controls-panel button:active::after {
+  width: 200px;
+  height: 200px;
+  opacity: 0;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 24px;
+  padding: 8px;
+  border-radius: 50%;
+  transition: transform var(--transition);
+}
+
+.theme-toggle:hover {
+  transform: rotate(90deg);
+}
+
+/* Specific button styles */
+button[style*="backgroundColor: #4a90e2"] {
+  background: linear-gradient(45deg, var(--primary-color), #00c4ff);
+}
+
+button[style*="backgroundColor: #2ecc40"] {
+  background: linear-gradient(45deg, var(--accent-color), #4ade80);
+}
+
+button[style*="backgroundColor: #ff4136"] {
+  background: linear-gradient(45deg, var(--secondary-color), #ff7875);
+  padding: 8px;
+  font-size: 14px;
+}
+
+.dark-mode button[style*="backgroundColor"] {
+  filter: brightness(1.2);
+}
+
+/* Loader with pulse effect */
+.loader {
+  position: relative;
+}
+
+.loader-spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid rgba(74, 144, 226, 0.3);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite, pulseLoader 2s infinite;
+}
+
+.loader::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(74, 144, 226, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulseLoader 2s infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulseLoader {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+/* Floating text and effects */
+.floating-text {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.neon-text {
+  font-size: 4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #00f3ff;
+  text-shadow: 0 0 20px rgba(0, 243, 255, 0.8), 0 0 40px rgba(0, 243, 255, 0.6);
+  animation: neonPulse 2s infinite;
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    opacity: 0.9;
+    text-shadow: 0 0 20px rgba(0, 243, 255, 0.8), 0 0 40px rgba(0, 243, 255, 0.6);
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 30px rgba(0, 243, 255, 1), 0 0 60px rgba(0, 243, 255, 0.8);
+  }
+}
+
+.text-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 243, 255, 0.3) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: glowFade 3s infinite;
+}
+
+@keyframes glowFade {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Marker styles */
+.realistic-marker {
+  position: relative;
+  transition: all var(--transition);
+}
+
+.realistic-marker::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, currentColor 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.transport-marker {
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  animation: bounceMarker 2s infinite;
+}
+
+@keyframes bounceMarker {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Drag-and-drop styles */
+.draggable {
+  transition: background-color var(--transition), opacity var(--transition), transform var(--transition);
+}
+
+.draggable:hover {
+  background: rgba(240, 240, 240, 0.3);
+  transform: scale(1.02);
+  animation: bounceWaypoint 0.5s ease;
+}
+
+.dark-mode .draggable:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.draggable.dragging {
+  opacity: 0.7;
+  border: 2px dashed var(--primary-color);
+  box-shadow: 0 0 15px rgba(74, 144, 226, 0.5);
+  animation: pulseDrag 1s infinite;
+}
+
+@keyframes bounceWaypoint {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes pulseDrag {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+/* Mapbox specific styles */
+.mapboxgl-canvas {
+  transition: filter var(--transition), transform var(--transition);
+}
+
+.mapboxgl-ctrl-attrib {
+  display: none;
+}
+
+/* Globe view effect */
+.globe-view .mapboxgl-canvas {
+  filter: drop-shadow(0 0 50px rgba(0, 163, 255, 0.4));
+  transform: scale(1.03);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .controls-panel {
+    width: calc(100% - 40px) !important;
+    max-width: 340px;
+    padding: 15px;
+  }
+
+  .search-container {
+    padding: 10px;
+  }
+
+  .waypoint-input, .controls-panel select {
+    font-size: 14px;
+    padding: 10px 10px 10px 35px;
+  }
+
+  .controls-panel select {
+    padding: 10px;
+  }
+
+  .controls-panel button {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .floating-text {
+    bottom: 10%;
+  }
+
+  .neon-text {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .controls-panel {
+    padding: 10px;
+  }
+
+  .waypoint-input {
+    width: 55%;
+  }
+
+  .controls-panel select {
+    width: 35%;
+  }
+
+  .neon-text {
+    font-size: 2rem;
+  }
+
+  .loader-spinner {
+    width: 50px;
+    height: 50px;
+  }
+
+  .loader::before {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+/* MapComponent.css */
+/* Add these new styles */
+
+/* Water wave effects */
+.mapboxgl-ctrl canvas.wave-overlay {
+  position: absolute;
+  mix-blend-mode: screen;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.wave-shader {
+  animation: waveAnimation 8s infinite linear;
+}
+
+@keyframes waveAnimation {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 0; }
+}
+
+/* Enhance water appearance */
+.mapboxgl-water {
+  opacity: 0.8 !important;
+}
+
+/* Add foam effect to shorelines */
+.mapboxgl-water::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, 
+    rgba(255, 255, 255, 0.3) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.3) 75%);
+  background-size: 200% 200%;
+  animation: waveFoam 5s linear infinite;
+}
+
+@keyframes waveFoam {
+  0% { background-position: 0 0; }
+  100% { background-position: 200% 0; }
+}
+
+
+
+/* Administrative boundaries */
+.mapboxgl-boundary-highlight {
+  animation: boundaryPulse 2s infinite;
+}
+
+@keyframes boundaryPulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* Admin area list */
+.admin-area-item {
+  transition: transform 0.2s ease;
+}
+
+.admin-area-item:hover {
+  transform: translateX(5px);
+}
+
+/* Type colors */
+.country-color { color: #4CAF50; }
+.region-color { color: #2196F3; }
+.city-color { color: #FF9800; }
